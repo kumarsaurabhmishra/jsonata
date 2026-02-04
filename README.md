@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# JSONata Playground (Multi-Version) 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional, production-ready JSONata evaluation suite that supports multiple JavaScript versions and the official Java implementation (**JSONata4Java**). Built for developers who need to test JSONata expressions against different engine behaviors in a single, unified interface.
 
-Currently, two official plugins are available:
+![JSONata Logo](./public/favicon.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Multi-Engine Support**: Toggle between 11 versions of JSONata (Latest v2.1.0 down to v1.8.6).
+- **Official Java Integration**: Real-time evaluation using `com.ibm.jsonata4java` (v2.6.x) via a dedicated Spring Boot backend.
+- **Smart Context-Aware Autocomplete**: 
+  - Dynamically extracts keys from your Input JSON.
+  - Understands tree structure (e.g., typing `Account.` only shows fields inside the Account object).
+  - Handles array mapping (e.g., `Order[0].` or mapping over `Product.`).
+  - Automatically wraps keys with spaces in double quotes (e.g., `"Account Name"`).
+- **Perpetual Evaluation**: Immediate feedback with debounced auto-run on every keystroke.
+- **Developer Tools**:
+  - **One-click Format**: Dedicated formatting buttons for both Input JSON and JSONata Expressions.
+  - **Copy to Clipboard**: Quickly grab your evaluation results.
+  - **State Persistence**: Your work is automatically saved in `localStorage`.
+- **Modern UI/UX**: Premium dark-themed aesthetic using Tailwind CSS and Monaco Editor (the heart of VS Code).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🏗️ Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The project is structured as a monorepo-ready repository:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend**: React 18 + TypeScript + Vite. Uses a custom `EngineAdapter` to manage versioned JS modules and remote API calls.
+- **Backend** (`/backend`): Spring Boot 3 + Maven. Implements a REST API to expose the Java-based JSONata engine.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Local Development
+
+### 1. Frontend
+```bash
+# Install dependencies
+npm install
+
+# Run dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Backend
+Ensure you have **JDK 17** and **Maven** installed.
+```bash
+cd backend
+mvn spring-boot:run
 ```
+
+---
+
+## 🤝 Created By
+Created with ❤️ by **[Saurabh](https://github.com/kumarsaurabhmishra)**.🎓
+
+---
+
+## 📄 License
+This project is for demonstration and development purposes. JSONata engines are subject to their respective licenses.
