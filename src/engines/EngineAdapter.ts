@@ -12,7 +12,7 @@ import jsonata186 from 'jsonata-1.8.6';
 import type { IEngineAdapter, JSONataEngine } from './types.ts';
 
 const enginesMap: Record<string, any> = {
-    'Latest': jsonataLatest,
+    'JSONata4Java (v2.6.x)': 'java-remote',
     'v2.1.0': jsonata210,
     'v2.0.6': jsonata206,
     'v2.0.5': jsonata205,
@@ -22,8 +22,7 @@ const enginesMap: Record<string, any> = {
     'v2.0.1': jsonata201,
     'v2.0.0': jsonata200,
     'v1.8.7': jsonata187,
-    'v1.8.6': jsonata186,
-    'JSONata4Java (v2.6.x)': 'java-remote',
+    'v1.8.6': jsonata186
 };
 
 // Use environment variable for backend URL in production
