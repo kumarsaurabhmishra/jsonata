@@ -219,8 +219,19 @@ const App: React.FC = () => {
           </div>
         )}
       </div>
-      <div className="text-slate-500">
-        Engine: <span className="text-slate-300 font-mono">{version}</span>
+      <div className="flex items-center gap-4">
+        <div className="text-slate-500">
+          Created by <a
+            href="https://github.com/kumarsaurabhmishra"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+          >Saurabh</a>
+        </div>
+        <div className="h-4 w-px bg-slate-800" />
+        <div className="text-slate-500">
+          Engine: <span className="text-slate-300 font-mono">{version}</span>
+        </div>
       </div>
     </div>
   );
