@@ -77,6 +77,14 @@ const App: React.FC = () => {
   }, [jsonInput]);
 
   const handleEditorMount = (_editor: monaco.editor.IStandaloneCodeEditor, monaco: any) => {
+    // Disable built-in validation as it conflicts with JSONata syntax
+    if (monaco.languages.typescript?.javascriptDefaults) {
+      monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: true,
+        noSyntaxValidation: true,
+      });
+    }
+
     if (completionProviderRef.current) return;
 
     completionProviderRef.current = monaco.languages.registerCompletionItemProvider('javascript', {
