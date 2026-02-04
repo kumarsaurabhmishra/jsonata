@@ -100,13 +100,19 @@ const App: React.FC = () => {
           endColumn: word.endColumn,
         };
 
-        const suggestions = keys.map(key => ({
-          label: key,
-          kind: monaco.languages.CompletionItemKind.Field,
-          insertText: key,
-          detail: context ? `In ${context}` : 'From JSON root',
-          range,
-        }));
+        const suggestions = keys.map(key => {
+          // JSONata allows keys with spaces or special characters to be wrapped in double quotes
+          const needsQuotes = /[\s\-]/.test(key);
+          const insertText = needsQuotes ? `"${key}"` : key;
+
+          return {
+            label: key,
+            kind: monaco.languages.CompletionItemKind.Field,
+            insertText: insertText,
+            detail: context ? `In ${context}` : 'From JSON root',
+            range,
+          };
+        });
 
         return { suggestions };
       },
