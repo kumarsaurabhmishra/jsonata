@@ -9,10 +9,11 @@ import jsonata201 from 'jsonata-2.0.1';
 import jsonata200 from 'jsonata-2.0.0';
 import jsonata187 from 'jsonata-1.8.7';
 import jsonata186 from 'jsonata-1.8.6';
-import type { IEngineAdapter, JSONataEngine } from './types.ts';
+import type { IEngineAdapter, TransformerEngine } from './types.ts';
 
 const enginesMap: Record<string, any> = {
     'JSONata4Java (v2.6.x)': 'java-remote',
+    'v0.1.8': 'java-remote-jolt',
     'v2.1.0': jsonata210,
     'v2.0.6': jsonata206,
     'v2.0.5': jsonata205,
@@ -29,15 +30,16 @@ const enginesMap: Record<string, any> = {
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 export class EngineAdapter implements IEngineAdapter {
-    private engines: Map<string, JSONataEngine> = new Map();
+    private engines: Map<string, TransformerEngine> = new Map();
 
-    async getEngine(version: string): Promise<JSONataEngine> {
+    async getEngine(version: string): Promise<TransformerEngine> {
         if (this.engines.has(version)) {
             return this.engines.get(version)!;
         }
 
-        if (version === 'JSONata4Java (v2.6.x)') {
-            const engine: JSONataEngine = {
+        if (version === 'JSONata4Java (v2.6.x)' || version === 'v0.1.8') {
+            const mode = version === 'v0.1.8' ? 'jolt' : 'jsonata';
+            const engine: TransformerEngine = {
                 version,
                 evaluate: async (expression: string, input: any) => {
                     try {
@@ -46,7 +48,7 @@ export class EngineAdapter implements IEngineAdapter {
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ expression, input }),
+                            body: JSON.stringify({ expression, input, mode }),
                         });
 
                         if (!response.ok) {
@@ -78,14 +80,14 @@ export class EngineAdapter implements IEngineAdapter {
             throw new Error(`Engine ${version} failed to load correctly`);
         }
 
-        const engine: JSONataEngine = {
+        const engine: TransformerEngine = {
             version,
             evaluate: async (expression: string, input: any) => {
                 try {
                     const expr = jsonata(expression);
                     return await expr.evaluate(input);
                 } catch (e) {
-                    throw new Error(`JSONata Error: ${(e as Error).message}`);
+                    throw new Error(`Evaluation Error: ${(e as Error).message}`);
                 }
             }
         };

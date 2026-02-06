@@ -4,12 +4,12 @@ import { safeJsonParse, formatOutput, debounce } from '../utils/jsonUtils';
 
 export type Status = 'Ready' | 'Running...' | 'Error' | 'Success';
 
-export const useJSONata = (
+export const useTransformer = (
     initialJson: string,
     initialExpression: string,
     initialVersion: string
 ) => {
-    console.log('useJSONata: Hook initializing with version:', initialVersion);
+    console.log('useTransformer: Hook initializing with version:', initialVersion);
     const [jsonInput, setJsonInput] = useState(initialJson);
     const [expression, setExpression] = useState(initialExpression);
     const [version, setVersion] = useState(initialVersion);
@@ -33,7 +33,7 @@ export const useJSONata = (
             }
 
             if (!currentExpr.trim()) {
-                setError(prev => ({ ...prev, expression: 'Expression is required' }));
+                setError(prev => ({ ...prev, expression: 'Expression / Spec is required' }));
                 setStatus('Error');
                 return;
             }

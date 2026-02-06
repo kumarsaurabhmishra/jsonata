@@ -5,6 +5,7 @@ interface VersionSelectorProps {
     versions: string[];
     selectedVersion: string;
     onVersionChange: (version: string) => void;
+    mode: 'jsonata' | 'jolt';
     disabled?: boolean;
 }
 
@@ -12,11 +13,12 @@ export const VersionSelector: React.FC<VersionSelectorProps> = ({
     versions,
     selectedVersion,
     onVersionChange,
+    mode,
     disabled
 }) => {
     return (
         <div className="relative inline-block">
-            <label className="sr-only" htmlFor="version-select">Select JSONata Version</label>
+            <label className="sr-only" htmlFor="version-select">Select {mode === 'jsonata' ? 'JSONata' : 'Jolt'} Version</label>
             <div className="relative">
                 <select
                     id="version-select"
@@ -27,7 +29,7 @@ export const VersionSelector: React.FC<VersionSelectorProps> = ({
                 >
                     {versions.map((v) => (
                         <option key={v} value={v}>
-                            JSONata {v}
+                            {mode === 'jsonata' ? 'JSONata' : 'Jolt'} {v}
                         </option>
                     ))}
                 </select>
