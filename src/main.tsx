@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
+import { Analytics } from '@vercel/analytics/react'
+
 console.log('Main: Starting initialization...');
 
 window.addEventListener('error', (event) => {
@@ -24,6 +26,7 @@ try {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <App />
+      <Analytics />
     </React.StrictMode>,
   );
   console.log('Main: Rendered root successfully');

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "jsonata": "^2.1.0",
     "jsonata-1.6.5": "npm:jsonata@^1.6.5",
