@@ -5,6 +5,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 console.log('Main: Starting initialization...');
 
@@ -30,6 +31,7 @@ try {
         <App />
       </ThemeProvider>
       <Analytics />
+      <SpeedInsights />
     </React.StrictMode>,
   );
   console.log('Main: Rendered root successfully');
