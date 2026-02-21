@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
 import { Analytics } from '@vercel/analytics/react'
@@ -25,7 +26,9 @@ try {
 
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
       <Analytics />
     </React.StrictMode>,
   );

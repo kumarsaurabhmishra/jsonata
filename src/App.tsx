@@ -3,6 +3,7 @@ import { AppShell } from './components/layout/AppShell';
 import { EditorPanel } from './components/editors/EditorPanel';
 import { VersionSelector } from './components/controls/VersionSelector';
 import { Button } from './components/ui/Button';
+import { ThemeToggle } from './components/ui/ThemeToggle';
 import { useTransformer } from './hooks/useTransformer';
 import { cn } from './utils/cn';
 import { getSuggestionsForPath, getExpressionContext } from './utils/suggestionUtils';
@@ -286,18 +287,18 @@ const App: React.FC = () => {
           <Cpu className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="text-sm font-bold tracking-tight">JSON Transformer <span className="text-blue-400">Playground</span></h1>
-          <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">Multi-Engine Evaluation</p>
+          <h1 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">JSON Transformer <span className="text-blue-600 dark:text-blue-400">Playground</span></h1>
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest">Multi-Engine Evaluation</p>
         </div>
       </div>
 
       {/* Center: Mode Toggle */}
-      <div className="flex items-center p-1 bg-slate-800/80 rounded-lg border border-slate-700">
+      <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800/80 rounded-lg border border-slate-200 dark:border-slate-700">
         <button
           onClick={() => switchMode('jsonata')}
           className={cn(
             "px-3 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-all",
-            mode === 'jsonata' ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" : "text-slate-400 hover:text-slate-200"
+            mode === 'jsonata' ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
           )}
         >
           JSONata
@@ -306,7 +307,7 @@ const App: React.FC = () => {
           onClick={() => switchMode('jolt')}
           className={cn(
             "px-3 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-all",
-            mode === 'jolt' ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" : "text-slate-400 hover:text-slate-200"
+            mode === 'jolt' ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
           )}
         >
           Jolt
@@ -315,6 +316,8 @@ const App: React.FC = () => {
 
       {/* Right: Version Selector and Actions */}
       <div className="flex-1 flex items-center justify-end gap-4">
+        <ThemeToggle />
+        <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-1" />
         <div className="min-w-[180px]">
           <VersionSelector
             versions={availableVersions.filter(v => mode === 'jolt' ? v.startsWith('v0') : !v.startsWith('v0'))}
@@ -324,10 +327,10 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="h-6 w-px bg-slate-800 mx-1" />
+        <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-1" />
 
-        <div className="flex items-center gap-1.5 bg-slate-800/50 p-1 rounded-lg border border-slate-700">
-          <Button variant="ghost" size="sm" onClick={handleReset} title="Reset to sample">
+        <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg border border-slate-200 dark:border-slate-700">
+          <Button variant="ghost" size="sm" onClick={handleReset} title="Reset to sample" className="text-slate-700 dark:text-slate-300">
             <RotateCcw className="w-4 h-4 mr-1.5" />
             <span className="text-xs">Reset</span>
           </Button>
@@ -344,29 +347,29 @@ const App: React.FC = () => {
             "w-2 h-2 rounded-full",
             status === 'Running...' ? "bg-yellow-500 animate-pulse" :
               status === 'Success' ? "bg-emerald-500" :
-                status === 'Error' ? "bg-red-500" : "bg-slate-500"
+                status === 'Error' ? "bg-red-500" : "bg-slate-400 dark:bg-slate-500"
           )} />
-          <span className="text-slate-400 uppercase tracking-wider">{status}</span>
+          <span className="text-slate-600 dark:text-slate-400 uppercase tracking-wider">{status}</span>
         </div>
         {status === 'Error' && error.json && (
-          <div className="flex items-center gap-1.5 text-red-400">
+          <div className="flex items-center gap-1.5 text-red-600 dark:text-red-400">
             <AlertCircle className="w-3.5 h-3.5" />
             <span>JSON Parse Error</span>
           </div>
         )}
       </div>
       <div className="flex items-center gap-4">
-        <div className="text-slate-500">
+        <div className="text-slate-500 dark:text-slate-500">
           Created by <a
             href="https://github.com/kumarsaurabhmishra"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+            className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors font-semibold"
           >Saurabh</a>
         </div>
-        <div className="h-4 w-px bg-slate-800" />
-        <div className="text-slate-500">
-          Engine: <span className="text-slate-300 font-mono">{version}</span>
+        <div className="h-4 w-px bg-slate-200 dark:bg-slate-800" />
+        <div className="text-slate-600 dark:text-slate-400">
+          Engine: <span className="text-slate-900 dark:text-slate-300 font-mono">{version}</span>
         </div>
       </div>
     </div>

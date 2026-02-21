@@ -25,7 +25,7 @@ export const VersionSelector: React.FC<VersionSelectorProps> = ({
                     value={selectedVersion}
                     onChange={(e) => onVersionChange(e.target.value)}
                     disabled={disabled}
-                    className="appearance-none bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md pl-3 pr-8 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/50 hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-200 text-xs rounded-md pl-3 pr-8 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                     {versions.map((v) => (
                         <option key={v} value={v}>
